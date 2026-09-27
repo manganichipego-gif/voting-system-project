@@ -8,6 +8,7 @@ function Ballot() {
   const [ballotSelections, setBallotSelections] = useState({})
   const [message, setMessage] = useState('')
   const [isReviewing, setIsReviewing] = useState(false)
+  const [deviceId, setDeviceId] = useState('')
 
   useEffect(() => {
     // Fetch candidates from Django
@@ -22,6 +23,15 @@ function Ballot() {
       .catch(error => console.error('Error:', error))
   }, [])
 
+useEffect(() => {
+    let footprint = localStorage.getItem('election_device_footprint');
+    if (!footprint) {
+      footprint = crypto.randomUUID();
+      localStorage.setItem('election_device_footprint', footprint);
+    }
+    setDeviceId(footprint);
+  }, []);
+
   // Handle ticking a box
   const handleSelection = (position, candidateId) => {
     setBallotSelections({
@@ -35,7 +45,10 @@ function Ballot() {
     fetch('http://127.0.0.1:8000/api/vote/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ votes: ballotSelections })
+      body: JSON.stringify({ 
+          votes: ballotSelections, 
+          device_id: deviceId 
+        })
     })
     .then(response => {
       if (response.ok) setMessage('Ballot submitted successfully!')

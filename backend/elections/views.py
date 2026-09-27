@@ -9,7 +9,8 @@ from rest_framework.decorators import api_view
 from django.utils import timezone
 from .models import RegistrationRequest, ElectionSettings
 from django.db.models import Count
-
+from django.http import HttpResponse
+from django.core.mail import send_mail
 
 
 class CandidateList(generics.ListAPIView):
@@ -49,14 +50,6 @@ class ElectionResults(APIView):
         return Response(list(results))
     
 
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from django.utils import timezone
-from django.contrib.auth.models import User
-from django.contrib.auth.hashers import make_password
-from .models import RegistrationRequest, ElectionSettings
-from django.http import HttpResponse
-from django.core.mail import send_mail
 
 @api_view(['POST'])
 def request_registration(request):
@@ -122,26 +115,6 @@ def admin_decision(request, token, action):
         req.delete()
         return HttpResponse(f"<h1>Declined</h1><p>Student {req.username} was denied. A rejection email has been sent.</p>")
 
-@api_view(['GET'])
-def election_status(request):
-    settings = ElectionSettings.objects.first()
-    
-    if not settings:
-        return Response({
-            'is_open': False,
-            'results_released': False,
-            'message': 'Election settings not configured.'
-        })
-        
-    now = timezone.now()
-    is_open = settings.start_time <= now <= settings.end_time
-    
-    return Response({
-        'is_open': is_open,
-        'results_released': settings.results_released,
-        'start_time': settings.start_time,
-        'end_time': settings.end_time
-    })
 
 @api_view(['POST'])
 def setup_password(request):
@@ -190,3 +163,36 @@ def election_status(request):
         'start_time': settings.start_time,
         'end_time': settings.end_time
     })
+
+@api_view(['POST'])
+def submit_ballot(request):
+    if not request.user.is_authenticated:
+        return Response({'error': 'You must be logged in to cast a vote.'}, status=401)
+
+    votes = request.data.get('votes', {})
+    device_footprint = request.data.get('device_id')
+    
+    if Vote.objects.filter(voter=request.user).exists():
+        return Response({'error': 'You have already cast your ballot. Multiple votes are not allowed.'}, status=403)
+        
+    if device_footprint and Vote.objects.filter(device_id=device_footprint).exists():
+        return Response({
+            'error': 'SECURITY VIOLATION: A vote has already been cast from this physical device. Multiple votes per device are prohibited.'
+        }, status=403)
+        
+    try:
+        for position, candidate_id in votes.items():
+            candidate = Candidate.objects.get(id=candidate_id)
+            
+            Vote.objects.create(
+                voter=request.user,
+                candidate=candidate,
+                device_id=device_footprint
+            )
+            
+        return Response({'success': 'Ballot submitted successfully!'})
+        
+    except Candidate.DoesNotExist:
+        return Response({'error': 'Invalid candidate selected. Please try again.'}, status=400)
+    except Exception as e:
+        return Response({'error': f'An error occurred: {str(e)}'}, status=500)

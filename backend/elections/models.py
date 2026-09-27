@@ -23,6 +23,8 @@ class Vote(models.Model):
     candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
     position = models.CharField(max_length=100) 
     voted_at = models.DateTimeField(auto_now_add=True)
+    device_id = models.CharField(max_length=255, blank=True, null=True) 
+
 
     class Meta:
         unique_together = ('voter', 'position')
