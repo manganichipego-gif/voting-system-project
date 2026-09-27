@@ -1,0 +1,305 @@
+/* Import a modern, clean font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  /* Deep, secure tech vault background */
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); 
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* The Glass Card Container */
+.ballot-container {
+  width: 100%;
+  max-width: 850px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  overflow: hidden;
+}
+
+.ballot-header {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ballot-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: -webkit-linear-gradient(#fff, #a1c4fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.position-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 300;
+  margin: 30px 0;
+  letter-spacing: 1.5px;
+  color: #a1c4fd;
+}
+
+/* Horizontal Grid for Candidates */
+.position-section {
+  padding: 0 40px 30px;
+}
+
+.candidate-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* Individual Candidate Glass Cards */
+.candidate-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+}
+
+.candidate-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Glowing Selection Effect */
+.candidate-card.selected {
+  background: rgba(43, 212, 95, 0.1);
+  border-color: #2bd45f;
+  box-shadow: 0 0 20px rgba(43, 212, 95, 0.2), inset 0 0 10px rgba(43, 212, 95, 0.1);
+  transform: translateY(-5px);
+}
+
+/* Images */
+.image-wrapper {
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.image-wrapper.portrait {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  transition: border-color 0.3s ease;
+}
+
+.candidate-card.selected .image-wrapper.portrait {
+  border-color: #2bd45f;
+}
+
+.image-wrapper.logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Candidate Text */
+.candidate-info h3 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.party-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.candidate-card.selected .party-badge {
+  background: #2bd45f;
+  color: #000;
+  font-weight: 600;
+}
+
+/* Sleek Buttons */
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 40px;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary { 
+  background: linear-gradient(45deg, #1e3c72, #2a5298); 
+  color: white; 
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.4);
+}
+.btn-primary:hover { box-shadow: 0 6px 20px rgba(30, 60, 114, 0.6); }
+
+.btn-secondary { 
+  background: rgba(255, 255, 255, 0.1); 
+  color: white; 
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.btn-secondary:hover:not(:disabled) { background: rgba(255, 255, 255, 0.2); }
+
+.btn-success { 
+  background: linear-gradient(45deg, #11998e, #38ef7d); 
+  color: #000; 
+  box-shadow: 0 4px 15px rgba(56, 239, 125, 0.4);
+}
+.btn-success:hover { box-shadow: 0 6px 20px rgba(56, 239, 125, 0.6); }
+
+.btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.hidden-radio {
+  position: absolute;
+  opacity: 0;
+}
+
+/* System Messages */
+.message {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+}
+.message.error { border-left: 4px solid #ff4b4b; color: #ffb3b3; }
+.message.success { border-left: 4px solid #2bd45f; color: #b3ffcc; }
+.loading { text-align: center; font-size: 20px; color: #a1c4fd; font-weight: 300; }
+
+/* Review Screen Styles */
+.review-section {
+  padding: 0 40px 30px;
+}
+
+.review-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px 25px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.review-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.review-item h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #a1c4fd;
+  font-weight: 600;
+  letter-spacing: 1px;
+  width: 30%;
+}
+
+.review-candidate {
+  display: flex;
+  align-items: center;
+  width: 70%;
+  justify-content: flex-end;
+}
+
+.review-candidate p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.review-party {
+  font-size: 14px;
+  color: #aaa;
+  font-weight: 400;
+  margin-left: 8px;
+}
+
+.review-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.no-selection {
+  color: #ff4b4b !important;
+  font-style: italic;
+  font-weight: 400 !important;
+}
+
+.tick-box {
+  width: 32px;
+  height: 32px;
+  margin-top: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.candidate-card.selected .tick-box {
+  border-color: #2bd45f;
+  background: rgba(43, 212, 95, 0.2);
+  box-shadow: inset 0 0 10px rgba(43, 212, 95, 0.4);
+}
