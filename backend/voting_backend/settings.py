@@ -136,6 +136,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
-EMAIL_HOST_USER = 'votingsystem76@gmail.com' 
+EMAIL_HOST_USER = 'systemvoting76@gmail.com' 
 
 EMAIL_HOST_PASSWORD = 'lubrggqhlqzkzjha'

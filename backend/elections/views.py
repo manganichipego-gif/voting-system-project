@@ -55,19 +55,72 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from .models import RegistrationRequest, ElectionSettings
-
-# ... (Make sure your existing views for candidates and voting stay above this line) ...
+from django.http import HttpResponse
+from django.core.mail import send_mail
 
 @api_view(['POST'])
 def request_registration(request):
     username = request.data.get('username')
     email = request.data.get('email')
+
+    if any(char.isdigit() for char in username):
+        return Response({'error': 'Username cannot contain numbers.'}, status=400)
     
     if RegistrationRequest.objects.filter(email=email).exists():
         return Response({'error': 'Email already registered.'}, status=400)
         
-    RegistrationRequest.objects.create(username=username, email=email)
+    req = RegistrationRequest.objects.create(username=username, email=email)
+    
+    accept_link = f"http://127.0.0.1:8000/api/admin-decide/{req.admin_token}/accept/"
+    decline_link = f"http://127.0.0.1:8000/api/admin-decide/{req.admin_token}/decline/"
+    
+    send_mail(
+        'Action Required: New Voter Registration',
+        f'Student {username} ({email}) has requested access to the voting system.\n\n'
+        f'Click here to ACCEPT:\n{accept_link}\n\n'
+        f'Click here to DECLINE:\n{decline_link}',
+        'your.email@gmail.com',         # From email
+        ['admin@university.edu'],       # TO YOU (Put your actual email here)
+        fail_silently=False,
+    )
+    
     return Response({'success': 'Registration requested successfully! Waiting for admin approval.'})
+
+def admin_decision(request, token, action):
+    try:
+        req = RegistrationRequest.objects.get(admin_token=token)
+    except RegistrationRequest.DoesNotExist:
+        return HttpResponse("<h1>Error</h1><p>This request has already been processed or does not exist.</p>")
+
+    if action == 'accept':
+        if req.is_approved:
+            return HttpResponse("<h1>Already Approved</h1><p>This student was already approved.</p>")
+            
+        req.is_approved = True
+        req.save()
+        
+        send_mail(
+            'University Election - Registration Approved!',
+            f'Hello {req.username},\n\nYour registration has been approved.\n'
+            f'Your 5-digit approval code is: {req.approval_code}\n\n'
+            f'Go to http://localhost:5173/setup-password to create your account.',
+            'your.email@gmail.com', 
+            [req.email],            
+            fail_silently=False,
+        )
+        return HttpResponse(f"<h1>Accepted</h1><p>Student {req.username} has been approved. The 5-digit code was sent to their email.</p>")
+
+    elif action == 'decline':
+        
+        send_mail(
+            'University Election - Registration Denied',
+            f'Hello {req.username},\n\nUnfortunately, your request to register for the election has been denied by the administrator.',
+            'your.email@gmail.com', 
+            [req.email],            
+            fail_silently=False,
+        )
+        req.delete()
+        return HttpResponse(f"<h1>Declined</h1><p>Student {req.username} was denied. A rejection email has been sent.</p>")
 
 @api_view(['GET'])
 def election_status(request):
@@ -115,6 +168,7 @@ def setup_password(request):
         
     except RegistrationRequest.DoesNotExist:
         return Response({'error': 'Invalid username, or incorrect 5-digit code, or request not yet approved.'}, status=400)
+
 
 @api_view(['GET'])
 def election_status(request):

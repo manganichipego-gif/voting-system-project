@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
 export default function SetupPassword() {
   const [username, setUsername] = useState('');
@@ -6,6 +7,8 @@ export default function SetupPassword() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,10 +27,8 @@ export default function SetupPassword() {
       const data = await response.json();
       
       if (response.ok) {
-        setMessage('success: ' + data.success);
-        setUsername('');
-        setCode('');
-        setPassword('');
+      
+        navigate('/ballot'); 
       } else {
         setMessage('error: ' + (data.error || 'Failed to set password.'));
       }

@@ -74,11 +74,13 @@ class RegistrationRequest(models.Model):
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
     is_approved = models.BooleanField(default=False)
-    approval_code = models.CharField(max_length=5, default=generate_5_digit_code)
+    approval_code = models.CharField(max_length=5, default=generate_5_digit_code, editable=False) 
+    
+    admin_token = models.UUIDField(default=uuid.uuid4, editable=False) 
+    
     created_at = models.DateTimeField(auto_now_add=True)
-   
 
-    def __str__(self):
+    def _str_(self):
         return f"{self.username} - {self.email}"
 
 class ElectionSettings(models.Model):

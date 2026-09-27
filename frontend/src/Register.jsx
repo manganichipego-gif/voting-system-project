@@ -55,7 +55,10 @@ export default function Register() {
             type="text"
             required
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => {
+                const noNumbers = e.target.value.replace(/[0-9]/g, '');
+                setUsername(noNumbers);
+                }}
             style={{ 
               width: '100%', padding: '15px', borderRadius: '8px', 
               border: '1px solid rgba(255, 255, 255, 0.2)', 
