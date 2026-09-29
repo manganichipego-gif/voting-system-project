@@ -16,7 +16,7 @@ export default function SetupPassword() {
     setMessage('');
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/setup-password/', {
+      const response = await fetch('https://voting-system-project.onrender.com/admin/login/?next=/admin/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
