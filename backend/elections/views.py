@@ -56,8 +56,8 @@ def request_registration(request):
     username = request.data.get('username')
     email = request.data.get('email')
 
-    if any(char.isdigit() for char in username):
-        return Response({'error': 'Username cannot contain numbers.'}, status=400)
+    if not username.replace(' ', '').isalpha():
+        return Response({'error': 'Username can only contain letters and spaces.'}, status=400)
     
     if RegistrationRequest.objects.filter(email=email).exists():
         return Response({'error': 'Email already registered.'}, status=400)

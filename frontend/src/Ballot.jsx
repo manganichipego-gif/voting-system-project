@@ -16,9 +16,40 @@ function Ballot() {
       .then(response => response.json())
       .then(data => {
         setCandidates(data)
-        // Extract unique positions (e.g., ['President', 'Sports and Entertainment'])
-        const uniquePositions = [...new Set(data.map(c => c.position))]
-        setPositions(uniquePositions)
+        
+        const rawPositions = [...new Set(data.map(c => c.position))];
+        
+        
+        const officialOrder = [
+          "President",
+          "Vice President",
+          "Secretary General",
+          "Treasurer",
+          "President of BIT",
+          "President of AESS",
+          "President of Law",
+          "President of Medicine",
+          "Academic Minister",
+          "Minister of Finance",
+          "Minister of Communication and Information",
+          "Minister of Sports and Entertainment" ,
+          "Minister of Security and Discipline"
+        ];
+
+        
+        const sortedPositions = rawPositions.sort((a, b) => {
+          const indexA = officialOrder.indexOf(a);
+          const indexB = officialOrder.indexOf(b);
+
+          
+          const weightA = indexA === -1 ? 999 : indexA;
+          const weightB = indexB === -1 ? 999 : indexB;
+
+          return weightA - weightB;
+        });
+
+        
+        setPositions(sortedPositions);
       })
       .catch(error => console.error('Error:', error))
   }, [])

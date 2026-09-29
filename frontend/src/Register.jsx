@@ -56,9 +56,9 @@ export default function Register() {
             required
             value={username}
             onChange={(e) => {
-                const noNumbers = e.target.value.replace(/[0-9]/g, '');
-                setUsername(noNumbers);
-                }}
+              const lettersAndSpaces = e.target.value.replace(/[^a-zA-Z ]/g, '');
+              setUsername(lettersAndSpaces);
+             }}
             style={{ 
               width: '100%', padding: '15px', borderRadius: '8px', 
               border: '1px solid rgba(255, 255, 255, 0.2)', 
