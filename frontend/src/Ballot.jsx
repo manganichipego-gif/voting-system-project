@@ -12,7 +12,7 @@ function Ballot() {
 
   useEffect(() => {
     // Fetch candidates from Django
-    fetch('http://127.0.0.1:8000/api/candidates/')
+    fetch('https://voting-system-project.onrender.com/admin/login/?next=/admin/')
       .then(response => response.json())
       .then(data => {
         setCandidates(data)
