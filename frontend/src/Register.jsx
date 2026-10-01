@@ -12,7 +12,7 @@ export default function Register() {
     setMessage('');
 
     try {
-      const response = await fetch('https://voting-system-project.onrender.com/admin/login/?next=/admin/', {
+      const response = await fetch('https://voting-system-project.onrender.com/api/register/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

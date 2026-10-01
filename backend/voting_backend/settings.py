@@ -46,6 +46,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -138,3 +139,5 @@ EMAIL_HOST_PASSWORD = 'lubrggqhlqzkzjha'
 CORS_ALLOWED_ORIGINS = [
     "https://voting-system-project-seven.vercel.app",
 ]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
