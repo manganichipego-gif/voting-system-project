@@ -29,7 +29,7 @@ def approve_requests(modeladmin, request, queryset):
                 'University Election - Registration Approved!',
                 f'Hello {req.username},\n\nYour registration to vote has been approved by the Admin.\n\n'
                 f'Your 5-digit approval code is: {req.approval_code}\n\n'
-                f'Please go to http://localhost:5173/setup-password to enter this code and create your secure password.',
+                f'Please go to https://voting-system-project.onrender.com/api/setup-password/ to enter this code and create your secure password.',
                 'votingsystem76@gmail.com', 
                 [req.email],            
                 fail_silently=False,
@@ -60,9 +60,9 @@ class ElectionSettingsAdmin(admin.ModelAdmin):
             message = (
                 f'Hello {voter.username},\n\n'
                 f'The voting portal is officially open! '
-                f'Please log in to http://localhost:5173/ballot to cast your vote.'
+                f'Please log in to https://voting-system-project.onrender.com/api/setup-password/ to cast your vote.'
             )
-            from_email = 'your.email@gmail.com' # <-- Update this
+            from_email = 'systemvoting76@gmail.com' 
             messages.append((subject, message, from_email, [voter.email]))
             
         if messages:
@@ -80,7 +80,7 @@ class ElectionSettingsAdmin(admin.ModelAdmin):
                 f'The voting period has officially ended. Thank you for participating. '
                 f'The final results will be published soon by the administrator.'
             )
-            from_email = 'your.email@gmail.com' # <-- Update this
+            from_email = 'systemvoting76@gmail.com' # <-- Update this
             messages.append((subject, message, from_email, [voter.email]))
             
         if messages:
@@ -99,7 +99,7 @@ class ElectionSettingsAdmin(admin.ModelAdmin):
                 f'The official election results are now live! '
                 f'Log in to the voting portal to view the final counts.'
             )
-            from_email = 'your.email@gmail.com' # <-- Update this
+            from_email = 'systemvoting76@gmail.com' 
             messages.append((subject, message, from_email, [voter.email]))
             
         if messages:

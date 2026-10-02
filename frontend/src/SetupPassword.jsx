@@ -28,7 +28,7 @@ export default function SetupPassword() {
       
       if (response.ok) {
       
-        navigate('/ballot'); 
+        navigate('/home'); 
       } else {
         setMessage('error: ' + (data.error || 'Failed to set password.'));
       }
