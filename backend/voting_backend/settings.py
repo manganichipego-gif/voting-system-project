@@ -61,7 +61,7 @@ DATABASES = {
         default='postgresql://voting_db_fc0d_user:6QxTBLSzvHSWhgwBySLoFTvLMo54KU96@dpg-davg2su7bikc73dubnf0-a.oregon-postgres.render.com/voting_db_fc0d'
     )
     }
-}
+
 
 
 AUTH_PASSWORD_VALIDATORS = [
