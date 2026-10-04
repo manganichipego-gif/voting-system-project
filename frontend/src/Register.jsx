@@ -30,7 +30,7 @@ export default function Register() {
         setMessage('error: ' + (data.error || 'Registration failed.'));
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Fetch Error:', error);
       setMessage('error: Could not connect to the server.');
     } finally {
       setIsLoading(false);
