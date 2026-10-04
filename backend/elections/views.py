@@ -73,7 +73,7 @@ def request_registration(request):
         f'Click here to ACCEPT:\n{accept_link}\n\n'
         f'Click here to DECLINE:\n{decline_link}',
         'systemvoting76@gmail.com',        
-        ['systemvoting76@gmail.com'],       
+        ['manganichipego@gmail.com'],       
         fail_silently=False,
     )
     

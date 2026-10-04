@@ -105,6 +105,8 @@ EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_PASSWORD')
 EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
 
+DEFAULT_FROM_EMAIL = 'systemvoting76@gmail.com'
+SERVER_EMAIL = 'systemvoting76@gmail.com'
 
 CORS_ALLOWED_ORIGINS = [
     "https://voting-system-project-seven.vercel.app",
