@@ -73,7 +73,7 @@ useEffect(() => {
 
   // Submit the final ballot
   const submitBallot = () => {
-    fetch('https://voting-system-project.onrender.com/admin/login/?next=/admin/', {
+    fetch('https://voting-system-project-1.onrender.com/admin/login/?next=/admin/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 

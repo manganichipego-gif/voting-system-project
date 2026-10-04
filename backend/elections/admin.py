@@ -29,7 +29,7 @@ def approve_requests(modeladmin, request, queryset):
                 'University Election - Registration Approved!',
                 f'Hello {req.username},\n\nYour registration to vote has been approved by the Admin.\n\n'
                 f'Your 5-digit approval code is: {req.approval_code}\n\n'
-                f'Please go to https://voting-system-project.onrender.com/api/setup-password/ to enter this code and create your secure password.',
+                f'Please go to https://voting-system-project-1.onrender.com/api/setup-password/ to enter this code and create your secure password.',
                 'votingsystem76@gmail.com', 
                 [req.email],            
                 fail_silently=False,
