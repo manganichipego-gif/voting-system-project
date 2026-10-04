@@ -64,16 +64,16 @@ def request_registration(request):
         
     req = RegistrationRequest.objects.create(username=username, email=email)
     
-    accept_link = f"http://127.0.0.1:8000/api/admin-decide/{req.admin_token}/accept/"
-    decline_link = f"http://127.0.0.1:8000/api/admin-decide/{req.admin_token}/decline/"
+    accept_link = f"http://voting-system-project.onrender.com/api/admin-decide/{req.admin_token}/accept/"
+    decline_link = f"http://voting-system-project.onrender.com/api/admin-decide/{req.admin_token}/decline/"
     
     send_mail(
         'Action Required: New Voter Registration',
         f'Student {username} ({email}) has requested access to the voting system.\n\n'
         f'Click here to ACCEPT:\n{accept_link}\n\n'
         f'Click here to DECLINE:\n{decline_link}',
-        'your.email@gmail.com',         # From email
-        ['admin@university.edu'],       # TO YOU (Put your actual email here)
+        'systemvoting76@gmail.com',        
+        ['systemvoting76@gmail.com'],       
         fail_silently=False,
     )
     
@@ -96,8 +96,8 @@ def admin_decision(request, token, action):
             'University Election - Registration Approved!',
             f'Hello {req.username},\n\nYour registration has been approved.\n'
             f'Your 5-digit approval code is: {req.approval_code}\n\n'
-            f'Go to http://localhost:5173/setup-password to create your account.',
-            'your.email@gmail.com', 
+            f'Go to http://voting-system-project-seven.vercel.app/setup-password to create your account.',
+            'systemvoting76@gmail.com', 
             [req.email],            
             fail_silently=False,
         )
