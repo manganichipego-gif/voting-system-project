@@ -99,9 +99,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_HOST_USER = '09b338e3834439'
-EMAIL_HOST_PASSWORD = '9edf79118f0d05'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_PASSWORD') 
 EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
 
