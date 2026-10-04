@@ -99,11 +99,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '09b338e3834439'
+EMAIL_HOST_PASSWORD = '9edf79118f0d05'
+EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'systemvoting76@gmail.com' 
-EMAIL_HOST_PASSWORD = 'lubrggqhlqzkzjha'
+
 
 CORS_ALLOWED_ORIGINS = [
     "https://voting-system-project-seven.vercel.app",
