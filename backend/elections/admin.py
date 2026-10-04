@@ -24,13 +24,12 @@ def approve_requests(modeladmin, request, queryset):
             req.is_approved = True
             req.save()
             
-            # Send the automated email with the 5-digit code
             send_mail(
                 'University Election - Registration Approved!',
                 f'Hello {req.username},\n\nYour registration to vote has been approved by the Admin.\n\n'
                 f'Your 5-digit approval code is: {req.approval_code}\n\n'
                 f'Please go to https://voting-system-project-1.onrender.com/api/setup-password/ to enter this code and create your secure password.',
-                'votingsystem76@gmail.com', 
+                'systemvoting76@gmail.com', 
                 [req.email],            
                 fail_silently=False,
             )
@@ -44,7 +43,7 @@ class RegistrationRequestAdmin(admin.ModelAdmin):
 class ElectionSettingsAdmin(admin.ModelAdmin):
     list_display = ['start_time', 'end_time', 'results_released']
     
-    # Register all three actions
+    
     actions = [
         'open_election_and_notify', 
         'close_election_and_notify', 

@@ -108,7 +108,7 @@ def admin_decision(request, token, action):
         send_mail(
             'University Election - Registration Denied',
             f'Hello {req.username},\n\nUnfortunately, your request to register for the election has been denied by the administrator.',
-            'your.email@gmail.com', 
+            'systemvoting76@gmail.com', 
             [req.email],            
             fail_silently=False,
         )
