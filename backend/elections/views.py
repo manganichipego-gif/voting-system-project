@@ -64,8 +64,8 @@ def request_registration(request):
         
     req = RegistrationRequest.objects.create(username=username, email=email)
     
-    accept_link = f"http://voting-system-project.onrender.com/api/admin-decide/{req.admin_token}/accept/"
-    decline_link = f"http://voting-system-project.onrender.com/api/admin-decide/{req.admin_token}/decline/"
+    accept_link = f"http://voting-system-project-1.onrender.com/api/admin-decide/{req.admin_token}/accept/"
+    decline_link = f"http://voting-system-project-1.onrender.com/api/admin-decide/{req.admin_token}/decline/"
     
     send_mail(
         'Action Required: New Voter Registration',

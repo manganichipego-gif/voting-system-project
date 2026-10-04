@@ -60,7 +60,7 @@ class ElectionSettingsAdmin(admin.ModelAdmin):
             message = (
                 f'Hello {voter.username},\n\n'
                 f'The voting portal is officially open! '
-                f'Please log in to https://voting-system-project.onrender.com/api/setup-password/ to cast your vote.'
+                f'Please log in to https://voting-system-project-1.onrender.com/api/setup-password/ to cast your vote.'
             )
             from_email = 'systemvoting76@gmail.com' 
             messages.append((subject, message, from_email, [voter.email]))
@@ -80,7 +80,7 @@ class ElectionSettingsAdmin(admin.ModelAdmin):
                 f'The voting period has officially ended. Thank you for participating. '
                 f'The final results will be published soon by the administrator.'
             )
-            from_email = 'systemvoting76@gmail.com' # <-- Update this
+            from_email = 'systemvoting76@gmail.com' 
             messages.append((subject, message, from_email, [voter.email]))
             
         if messages:

@@ -16,7 +16,7 @@ export default function SetupPassword() {
     setMessage('');
 
     try {
-      const response = await fetch('https://voting-system-project.onrender.com/api/setup-password/', {
+      const response = await fetch('https://voting-system-project-1.onrender.com/api/setup-password/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
