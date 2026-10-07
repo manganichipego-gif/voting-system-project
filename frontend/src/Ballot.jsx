@@ -12,7 +12,7 @@ function Ballot() {
 
   useEffect(() => {
     // Fetch candidates from Django
-    fetch('https://voting-system-project-1.onrender.com/api/candidates/')
+    fetch('https://Chipego.pythonanywhere.com/api/candidates/')
       .then(response => response.json())
       .then(data => {
         setCandidates(data)
@@ -73,7 +73,7 @@ useEffect(() => {
 
   // Submit the final ballot
   const submitBallot = () => {
-    fetch('https://voting-system-project-1.onrender.com/admin/login/?next=/admin/', {
+    fetch('https://Chipego.pythonanywhere.com/admin/login/?next=/admin/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 

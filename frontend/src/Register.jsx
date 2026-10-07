@@ -12,7 +12,7 @@ export default function Register() {
     setMessage('');
 
     try {
-      const response = await fetch('https://voting-system-project-1.onrender.com/api/register/', {
+      const response = await fetch('https://Chipego.pythonanywhere.com/api/register/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

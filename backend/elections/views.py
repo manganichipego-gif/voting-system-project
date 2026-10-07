@@ -62,10 +62,14 @@ def request_registration(request):
     if RegistrationRequest.objects.filter(email=email).exists():
         return Response({'error': 'Email already registered.'}, status=400)
         
+    allowed_domain = [ 'students.cavendish.co.zm']
+    if not any(email.endswith(domain) for domain in allowed_domain):
+        return Response({'error': 'Only university email addresses are allowed.'}, status=400)
+
     req = RegistrationRequest.objects.create(username=username, email=email)
     
-    accept_link = f"http://voting-system-project-1.onrender.com/api/admin-decide/{req.admin_token}/accept/"
-    decline_link = f"http://voting-system-project-1.onrender.com/api/admin-decide/{req.admin_token}/decline/"
+    accept_link = f"http://Chipego.pythonanywhere.com/api/admin-decide/{req.admin_token}/accept/"
+    decline_link = f"http://Chipego.pythonanywhere.com/api/admin-decide/{req.admin_token}/decline/"
     
     send_mail(
         'Action Required: New Voter Registration',
