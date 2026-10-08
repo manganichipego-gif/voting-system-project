@@ -26,7 +26,7 @@ def approve_requests(modeladmin, request, queryset):
             
             send_mail(
                 'University Election - Registration Approved!',
-                f'Hello {req.username},\n\nYour registration to vote has been approved by the Admin.\n\n'
+                f'Hello {req.first_name} {req.last_name},\n\nYour registration to vote has been approved by the Admin.\n\n'
                 f'Your 5-digit approval code is: {req.approval_code}\n\n'
                 f'Please go to https://Chipego.pythonanywhere.com/api/setup-password/ to enter this code and create your secure password.',
                 'systemvoting76@gmail.com', 
@@ -36,7 +36,7 @@ def approve_requests(modeladmin, request, queryset):
 
 @admin.register(RegistrationRequest)
 class RegistrationRequestAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'is_approved', 'created_at')
+    list_display = ('first_name', 'last_name', 'email', 'is_approved', 'created_at')
     actions = [approve_requests] 
 
 @admin.register(ElectionSettings)
@@ -57,7 +57,7 @@ class ElectionSettingsAdmin(admin.ModelAdmin):
         for voter in voters:
             subject = 'University Election is Now OPEN!'
             message = (
-                f'Hello {voter.username},\n\n'
+                f'Hello {voter.first_name} {voter.last_name},\n\n'
                 f'The voting portal is officially open! '
                 f'Please log in to https://Chipego.pythonanywhere.com/api/setup-password/ to cast your vote.'
             )
@@ -75,7 +75,7 @@ class ElectionSettingsAdmin(admin.ModelAdmin):
         for voter in voters:
             subject = 'University Election is Now CLOSED'
             message = (
-                f'Hello {voter.username},\n\n'
+                f'Hello {voter.first_name} {voter.last_name},\n\n'
                 f'The voting period has officially ended. Thank you for participating. '
                 f'The final results will be published soon by the administrator.'
             )
@@ -94,7 +94,7 @@ class ElectionSettingsAdmin(admin.ModelAdmin):
         for voter in voters:
             subject = 'University Election Results Published!'
             message = (
-                f'Hello {voter.username},\n\n'
+                f'Hello {voter.first_name} {voter.last_name},\n\n'
                 f'The official election results are now live! '
                 f'Log in to the voting portal to view the final counts.'
             )

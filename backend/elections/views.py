@@ -60,8 +60,17 @@ def request_registration(request):
     email = request.data.get('email')
 
     if not first_name.replace(' ', '').isalpha():
-        return Response({'error': 'First name can only contain letters and spaces.'}, status=400)
-
+        return Response({'error': 'First name can only contain letters.'}, status=400)
+    if middle_name and not middle_name.replace(' ', '').isalpha():
+        return Response({'error': 'Middle name can only contain letters.'}, status=400)
+    if not last_name.replace(' ', '').isalpha():
+        return Response({'error': 'Last name can only contain letters.'}, status=400)
+    if not student_id.isdigit():
+        return Response({'error': 'Student ID must be numbers only.'}, status=400)
+    
+    if RegistrationRequest.objects.filter(student_id=student_id).exists():
+        return Response({'error': 'Student ID already registered.'}, status=400)
+    
     if RegistrationRequest.objects.filter(email=email).exists():
         return Response({'error': 'Email already registered.'}, status=400)
         
@@ -69,14 +78,20 @@ def request_registration(request):
     if not any(email.endswith(domain) for domain in allowed_domain):
         return Response({'error': 'Only university email addresses are allowed.'}, status=400)
 
-    req = RegistrationRequest.objects.create(username=username, email=email)
-    
+    req = RegistrationRequest.objects.create(
+        first_name=first_name,
+        middle_name=middle_name,
+        last_name=last_name,
+        student_id=student_id,
+        email=email
+    )
+
     accept_link = f"http://Chipego.pythonanywhere.com/api/admin-decide/{req.admin_token}/accept/"
     decline_link = f"http://Chipego.pythonanywhere.com/api/admin-decide/{req.admin_token}/decline/"
     
     send_mail(
         'Action Required: New Voter Registration',
-        f'Student {username} ({email}) has requested access to the voting system.\n\n'
+        f'Student {first_name} {last_name} {student_id} ({email}) has requested access to the voting system.\n\n'
         f'Click here to ACCEPT:\n{accept_link}\n\n'
         f'Click here to DECLINE:\n{decline_link}',
         'systemvoting76@gmail.com',        
@@ -101,44 +116,46 @@ def admin_decision(request, token, action):
         
         send_mail(
             'University Election - Registration Approved!',
-            f'Hello {req.username},\n\nYour registration has been approved.\n'
+            f'Hello {req.first_name} {req.last_name},\n\nYour registration has been approved.\n'
             f'Your 5-digit approval code is: {req.approval_code}\n\n'
             f'Go to http://voting-system-project-seven.vercel.app/setup-password to create your account.',
             'systemvoting76@gmail.com', 
             [req.email],            
             fail_silently=False,
         )
-        return HttpResponse(f"<h1>Accepted</h1><p>Student {req.username} has been approved. The 5-digit code was sent to their email.</p>")
+        return HttpResponse(f"<h1>Accepted</h1><p>Student {req.first_name} {req.last_name} has been approved. The 5-digit code was sent to their email.</p>")
 
     elif action == 'decline':
         
         send_mail(
             'University Election - Registration Denied',
-            f'Hello {req.username},\n\nUnfortunately, your request to register for the election has been denied by the administrator.',
+            f'Hello {req.first_name} {req.last_name},\n\nUnfortunately, your request to register for the election has been denied by the administrator.',
             'systemvoting76@gmail.com', 
             [req.email],            
             fail_silently=False,
         )
         req.delete()
-        return HttpResponse(f"<h1>Declined</h1><p>Student {req.username} was denied. A rejection email has been sent.</p>")
+        return HttpResponse(f"<h1>Declined</h1><p>Student {req.first_name} {req.last_name} was denied. A rejection email has been sent.</p>")
 
 
 @api_view(['POST'])
 def setup_password(request):
-    username = request.data.get('username')
+    student_id = request.data.get('student_id')
     code = request.data.get('code')
     password = request.data.get('password')
 
     try:
 
-        req = RegistrationRequest.objects.get(username=username, approval_code=code, is_approved=True)
+        req = RegistrationRequest.objects.get(student_id=student_id, approval_code=code, is_approved=True)
         
-        if User.objects.filter(username=username).exists():
+        if User.objects.filter(username=student_id).exists():
             return Response({'error': 'Account already exists. You can now log in.'}, status=400)
 
         User.objects.create(
-            username=req.username,
+            username=req.student_id,
             email=req.email,
+            first_name=req.first_name,
+            last_name=req.last_name,
             password=make_password(password)
         )
         

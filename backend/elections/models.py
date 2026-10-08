@@ -30,7 +30,7 @@ class Vote(models.Model):
         unique_together = ('voter', 'position')
 
     def __str__(self):
-        return f"{self.voter.username} voted for {self.candidate.name}"
+        return f"{self.voter.first_name} {self.voter.last_name} voted for {self.candidate.name}"
 
 
 class Election(models.Model):
@@ -46,7 +46,7 @@ class Student(models.Model):
     faculty = models.CharField(max_length=100)
     
     def __str__(self):
-        return f"{self.user.username} - {self.studentRef}"
+        return f"{self.user.first_name} {self.user.last_name} - {self.studentRef}"
 
 class Eligibility(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
@@ -85,8 +85,8 @@ class RegistrationRequest(models.Model):
     
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
-        return f"{self.username} - {self.email}"
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.email}"
 
 class ElectionSettings(models.Model):
     start_time = models.DateTimeField(help_text="When voting opens")
