@@ -73,7 +73,10 @@ class ElectionSettings(models.Model):
 
 
 class RegistrationRequest(models.Model):
-    username = models.CharField(max_length=150, unique=True)
+    first_name = models.CharField(max_length=100)
+    middle_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100)
+    student_id = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=True)
     is_approved = models.BooleanField(default=False)
     approval_code = models.CharField(max_length=5, default=generate_5_digit_code, editable=False) 

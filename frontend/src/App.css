@@ -14,7 +14,7 @@ body {
   padding: 20px;
 }
 
-/* The Glass Card Container */
+
 .ballot-container {
   width: 100%;
   max-width: 850px;
@@ -54,7 +54,7 @@ body {
   color: #a1c4fd;
 }
 
-/* Horizontal Grid for Candidates */
+
 .position-section {
   padding: 0 40px 30px;
 }
@@ -65,7 +65,7 @@ body {
   gap: 25px;
 }
 
-/* Individual Candidate Glass Cards */
+
 .candidate-card {
   display: flex;
   flex-direction: column;
@@ -86,7 +86,7 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Glowing Selection Effect */
+
 .candidate-card.selected {
   background: rgba(43, 212, 95, 0.1);
   border-color: #2bd45f;
@@ -94,7 +94,7 @@ body {
   transform: translateY(-5px);
 }
 
-/* Images */
+
 .image-wrapper {
   background-color: rgba(255, 255, 255, 0.1);
   display: flex;
@@ -130,7 +130,6 @@ body {
   object-fit: cover;
 }
 
-/* Candidate Text */
 .candidate-info h3 {
   margin: 0 0 8px 0;
   font-size: 20px;
@@ -154,7 +153,7 @@ body {
   font-weight: 600;
 }
 
-/* Sleek Buttons */
+
 .pagination-controls {
   display: flex;
   justify-content: space-between;
@@ -207,7 +206,7 @@ body {
   opacity: 0;
 }
 
-/* System Messages */
+
 .message {
   margin-top: 15px;
   padding: 12px;
@@ -219,7 +218,7 @@ body {
 .message.success { border-left: 4px solid #2bd45f; color: #b3ffcc; }
 .loading { text-align: center; font-size: 20px; color: #a1c4fd; font-weight: 300; }
 
-/* Review Screen Styles */
+
 .review-section {
   padding: 0 40px 30px;
 }

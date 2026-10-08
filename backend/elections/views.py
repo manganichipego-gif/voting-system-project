@@ -53,12 +53,15 @@ class ElectionResults(APIView):
 
 @api_view(['POST'])
 def request_registration(request):
-    username = request.data.get('username')
+    first_name = request.data.get('first_name')
+    middle_name = request.data.get('middle_name', '')
+    last_name = request.data.get('last_name')
+    student_id = request.data.get('student_id')
     email = request.data.get('email')
 
-    if not username.replace(' ', '').isalpha():
-        return Response({'error': 'Username can only contain letters and spaces.'}, status=400)
-    
+    if not first_name.replace(' ', '').isalpha():
+        return Response({'error': 'First name can only contain letters and spaces.'}, status=400)
+
     if RegistrationRequest.objects.filter(email=email).exists():
         return Response({'error': 'Email already registered.'}, status=400)
         
