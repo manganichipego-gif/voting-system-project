@@ -25,15 +25,11 @@ const Login = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        // Displays error if they type the wrong ID or password
         setErrorMessage(data.error || "Invalid Student ID or Password.");
       } else {
         setErrorMessage("");
         alert("Login successful! Welcome to the Voting System.");
         
-        // FUTURE STEP: 
-        // This is where you will redirect the student to the actual voting page 
-        // after they successfully log in (e.g., using window.location.href or React Router)
       }
     } catch (error) {
       setErrorMessage("Network error. Please check your connection.");
