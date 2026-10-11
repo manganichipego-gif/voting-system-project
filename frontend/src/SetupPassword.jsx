@@ -105,3 +105,4 @@ export default function SetupPassword() {
     </div>
   );
 }
+export default SetupPassword;
