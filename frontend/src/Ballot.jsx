@@ -115,7 +115,7 @@ useEffect(() => {
                       {selectedCandidate.portrait && (
                         <img 
                           className="review-thumb"
-                          src={selectedCandidate.portrait.includes('http') ? selectedCandidate.portrait : `http://127.0.0.1:8000${selectedCandidate.portrait.startsWith('/') ? '' : '/media/'}${selectedCandidate.portrait}`} 
+                          src={selectedCandidate.portrait.includes('http') ? selectedCandidate.portrait : `http://Chipego.pythonanywhere.com${selectedCandidate.portrait.startsWith('/') ? '' : '/media/'}${selectedCandidate.portrait}`} 
                           alt="thumb" 
                         />
                       )}
@@ -173,7 +173,7 @@ useEffect(() => {
               <div className="image-wrapper portrait">
                 {candidate.portrait ? (
                   <img 
-                    src={candidate.portrait.includes('http') ? candidate.portrait : `http://127.0.0.1:8000${candidate.portrait.startsWith('/') ? '' : '/media/'}${candidate.portrait}`} 
+                    src={candidate.portrait.includes('http') ? candidate.portrait : `http://Chipego.pythonanywhere.com${candidate.portrait.startsWith('/') ? '' : '/media/'}${candidate.portrait}`} 
                     alt="portrait" 
                   />
                 ) : (
@@ -189,7 +189,7 @@ useEffect(() => {
               <div className="image-wrapper logo">
                 {candidate.party_logo && (
                   <img 
-                    src={candidate.party_logo.includes('http') ? candidate.party_logo : `http://127.0.0.1:8000${candidate.party_logo.startsWith('/') ? '' : '/media/'}${candidate.party_logo}`} 
+                    src={candidate.party_logo.includes('http') ? candidate.party_logo : `http://Chipego.pythonanywhere.com${candidate.party_logo.startsWith('/') ? '' : '/media/'}${candidate.party_logo}`} 
                     alt="logo" 
                   />
                 )}

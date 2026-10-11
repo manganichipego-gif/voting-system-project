@@ -11,7 +11,7 @@ from .models import RegistrationRequest, ElectionSettings
 from django.db.models import Count
 from django.http import HttpResponse
 from django.core.mail import send_mail
-
+from django.contrib.auth import authenticate, login
 
 class CandidateList(generics.ListAPIView):
     queryset = Candidate.objects.all()
@@ -220,3 +220,23 @@ def submit_ballot(request):
         return Response({'error': 'Invalid candidate selected. Please try again.'}, status=400)
     except Exception as e:
         return Response({'error': f'An error occurred: {str(e)}'}, status=500)
+        
+
+@api_view(['POST'])
+def user_login(request):
+    username = request.data.get('username') 
+    password = request.data.get('password')
+
+    user = authenticate(request, username=username, password=password)
+
+    if user is not None:
+        
+        login(request, user)
+        return Response({
+            'success': 'Login successful!',
+            'first_name': user.first_name,
+            'student_id': user.username
+        })
+    else:
+        # Sends a 400 error back to React if the password or ID is wrong
+        return Response({'error': 'Invalid Student ID or password.'}, status=400)

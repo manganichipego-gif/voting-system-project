@@ -3,6 +3,7 @@ import Home from './Home';
 import Ballot from './Ballot';
 import Register from './Register';
 import SetupPassword from './SetupPassword';
+import Login from './Login;'
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/setup-password" element={<SetupPassword />} /> 
         <Route path="/ballot" element={<Ballot />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<Home />} />
         <Route path="/" element={<Navigate to="/register" />} />
       </Routes>
     </Router>
