@@ -7,6 +7,7 @@ const Register = () => {
   const [studentId, setStudentId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setErrorMessage] = useState('')
   
   const firstInitial = firstName ? firstName.charAt(0).toLowerCase() : '';
   const middleInitial = middleName ? middleName.charAt(0).toLowerCase() : '';
@@ -19,7 +20,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setMessage('');
+    setErrorMessage('');
 
     try {
       const response = await fetch('https://Chipego.pythonanywhere.com/api/register/', {
@@ -43,11 +44,11 @@ const Register = () => {
         setLastName('');
         setStudentId('');
       } else {
-        setMessage('error: ' + (data.error || 'Registration failed.'));
+        setErrorMessage('error: ' + (data.error || 'Registration failed.'));
       }
     } catch (error) {
       console.error('Fetch Error:', error);
-      setMessage('error: Could not connect to the server.');
+      setErrorMessage('error: Could not connect to the server.');
     } finally {
       setIsLoading(false);
     }
