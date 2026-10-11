@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Register = () => {
   const [firstName, setFirstName] = useState('');
-  const [middleName, setMiddleName] = useState('')
+  const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
   const [studentId, setStudentId] = useState('');
   const [errormessage, setErrorMessage] = useState('');
