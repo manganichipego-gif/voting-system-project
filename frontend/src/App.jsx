@@ -3,7 +3,7 @@ import Home from './Home';
 import Ballot from './Ballot';
 import Register from './Register';
 import SetupPassword from './SetupPassword';
-import Login from './Login;'
+import Login from './Login';
 import './App.css';
 
 function App() {
