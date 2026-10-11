@@ -7,7 +7,7 @@ const Register = () => {
   const [studentId, setStudentId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setErrorMessage] = useState('')
+  
   
   const firstInitial = firstName ? firstName.charAt(0).toLowerCase() : '';
   const middleInitial = middleName ? middleName.charAt(0).toLowerCase() : '';
