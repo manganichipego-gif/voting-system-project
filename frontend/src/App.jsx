@@ -14,8 +14,8 @@ function App() {
         {/* The new Setup Password Route */}
         <Route path="/setup-password" element={<SetupPassword />} /> 
         <Route path="/ballot" element={<Ballot />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Home />} />
         <Route path="/" element={<Navigate to="/register" />} />
       </Routes>
     </Router>
