@@ -91,9 +91,11 @@ def request_registration(request):
     
     send_mail(
         'Action Required: New Voter Registration',
-        f'Student {first_name} {last_name} {student_id} ({email}) has requested access to the voting system.\n\n'
-        f'Click here to ACCEPT:\n{accept_link}\n\n'
-        f'Click here to DECLINE:\n{decline_link}',
+        f'''Student {first_name} {last_name} {student_id} ({email}) has requested access to the voting system.\n\n'
+        Click here to ACCEPT:
+        {accept_link}
+        Click here to DECLINE:
+        {decline_link}''',
         'systemvoting76@gmail.com',        
         ['manganichipego@gmail.com'],       
         fail_silently=False,
