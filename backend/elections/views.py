@@ -224,10 +224,10 @@ def submit_ballot(request):
 
 @api_view(['POST'])
 def user_login(request):
-    username = request.data.get('username') 
+    student_id = request.data.get('username')
     password = request.data.get('password')
 
-    user = authenticate(request, username=username, password=password)
+    user = authenticate(request, username=student_id, password=password)
 
     if user is not None:
         
