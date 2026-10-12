@@ -99,14 +99,13 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_PASSWORD') 
-EMAIL_PORT = '2525'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'systemvoting76@gmail.com'
+EMAIL_HOST_PASSWORD = 'zwjljpoyptdueufb'
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = 'systemvoting76@gmail.com'
-SERVER_EMAIL = 'systemvoting76@gmail.com'
 
 CORS_ALLOWED_ORIGINS = [
     "https://voting-system-project-seven.vercel.app",
