@@ -118,9 +118,12 @@ def admin_decision(request, token, action):
         
         send_mail(
             'University Election - Registration Approved!',
-            f'Hello {req.first_name} {req.last_name},\n\nYour registration has been approved.\n'
-            f'Your 5-digit approval code is: {req.approval_code}\n\n'
-            f'Go to http://voting-system-project-seven.vercel.app/setup-password to create your account.',
+            f"""Hello {req.first_name} {req.last_name},
+
+ Your Registration has been Approved.
+Your 5-digit approval code is: {req.approval_code}
+
+Go to http://voting-system-project-seven.vercel.app/setup-password to create your account.""",
             'systemvoting76@gmail.com', 
             [req.email],            
             fail_silently=False,
@@ -131,7 +134,9 @@ def admin_decision(request, token, action):
         
         send_mail(
             'University Election - Registration Denied',
-            f'Hello {req.first_name} {req.last_name},\n\nUnfortunately, your request to register for the election has been denied by the administrator.',
+            f"""Hello {req.first_name} {req.last_name},
+            
+            Unfortunately, your request to register for the election has been denied by the administrator.""",
             'systemvoting76@gmail.com', 
             [req.email],            
             fail_silently=False,
