@@ -73,7 +73,7 @@ def request_registration(request):
     
     if RegistrationRequest.objects.filter(email=email).exists():
         return Response({'error': 'Email already registered.'}, status=400)
-        
+    
 
     req = RegistrationRequest.objects.create(
         first_name=first_name,
