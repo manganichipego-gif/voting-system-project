@@ -57,9 +57,10 @@ WSGI_APPLICATION = 'voting_backend.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://voting_db_fc0d_user:6QxTBLSzvHSWhgwBySLoFTvLMo54KU96@dpg-davg2su7bikc73dubnf0-a.oregon-postgres.render.com/voting_db_fc0d'
-    )
+    'default': {
+        'ENGINE' : 'django.db.backends.sqlite3',
+        'NAME' : BASE_DIR / 'db.sqlite3',
+    }
     }
 
 
