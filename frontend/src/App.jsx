@@ -11,7 +11,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/register" element={<Register />} />
-        {/* The new Setup Password Route */}
         <Route path="/setup-password" element={<SetupPassword />} /> 
         <Route path="/ballot" element={<Ballot />} />
         <Route path="/login" element={<Login />} />

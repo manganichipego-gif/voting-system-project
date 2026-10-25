@@ -74,16 +74,13 @@ def request_registration(request):
     if RegistrationRequest.objects.filter(email=email).exists():
         return Response({'error': 'Email already registered.'}, status=400)
         
-    allowed_domain = [ 'students.cavendish.co.zm']
-    if not any(email.endswith(domain) for domain in allowed_domain):
-        return Response({'error': 'Only university email addresses are allowed.'}, status=400)
 
     req = RegistrationRequest.objects.create(
         first_name=first_name,
         middle_name=middle_name,
         last_name=last_name,
         student_id=student_id,
-        email=email
+        email=email,
     )
 
     accept_link = f"http://Chipego.pythonanywhere.com/api/admin-decide/{req.admin_token}/accept/"

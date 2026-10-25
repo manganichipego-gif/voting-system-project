@@ -5,6 +5,7 @@ const Register = () => {
   const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
   const [studentId, setStudentId] = useState('');
+  const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
@@ -12,10 +13,6 @@ const Register = () => {
   const firstInitial = firstName ? firstName.charAt(0).toLowerCase() : '';
   const middleInitial = middleName ? middleName.charAt(0).toLowerCase() : '';
   const lastInitial = lastName ? lastName.charAt(0).toLowerCase() : '';
-
-  const generatedEmail = (firstName && lastName && studentId) 
-  ? `${firstInitial}${middleInitial}${lastInitial}${studentId}@students.cavendish.co.zm`
-  : '';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,13 +103,13 @@ const Register = () => {
         </div>
 
         <div className="input-group">
-          <label>Official University Email</label>
+          <label>Personal Email</label>
           <input 
-            type="email" 
-            value={generatedEmail} 
-            readOnly 
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             style={{ 
-              backgroundColor: "rgba(255, 255, 255, 0.1)", // Gives a disabled look for dark themes
+              backgroundColor: "rgba(255, 255, 255, 0.1)",  
               cursor: "not-allowed",
               color: "#aaa"
             }} 
