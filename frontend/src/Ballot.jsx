@@ -73,7 +73,7 @@ useEffect(() => {
 
   // Submit the final ballot
   const submitBallot = () => {
-    fetch('https://Chipego.pythonanywhere.com/admin/login/?next=/admin/', {
+    fetch('https://Chipego.pythonanywhere.com/api/submit-ballot', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 

@@ -8,6 +8,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   
   
   const firstInitial = firstName ? firstName.charAt(0).toLowerCase() : '';
@@ -29,20 +30,18 @@ const Register = () => {
           first_name: firstName,
           last_name: lastName,
           student_id: studentId,
-          email: generatedEmail,
+          email: email,
         }),
       });
-      
+
       const data = await response.json();
-      
-      if (response.ok) {
-        setErrorMessage('success: ' + data.success);
-        setFirstName('');
-        setLastName('');
-        setStudentId('');
-      } else {
+      if (response.ok){
+        setIsSubmitted(true);
+      }
+      else{
         setErrorMessage('error: ' + (data.error || 'Registration failed.'));
       }
+      
     } catch (error) {
       console.error('Fetch Error:', error);
       setErrorMessage('error: Could not connect to the server.');
@@ -50,6 +49,17 @@ const Register = () => {
       setIsLoading(false);
     }
   };
+
+  if (isSubmitted){
+    return(
+      <div style={{ textAlign: 'center', padding:'50px', marginTop:'50px'}}>
+        <h2 style={{ color: "#28a745"}}> Request Successful!</h2>
+        <p style={{ fontSize: '18px', marginTop: '10px'}}>
+          Please wait for approval. You will receive an Email once your account has been Approved.
+          </p>
+          </div>
+    );
+  }
 
   return (
     <div className="registration-container">
