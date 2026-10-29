@@ -36,7 +36,7 @@ def approve_requests(modeladmin, request, queryset):
 
 @admin.register(RegistrationRequest)
 class RegistrationRequestAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'email', 'is_approved', 'created_at')
+    list_display = ('first_name', 'last_name', 'email', 'student_id','is_approved', 'created_at')
     actions = [approve_requests] 
 
 @admin.register(ElectionSettings)
