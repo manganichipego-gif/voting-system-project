@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
 export default function SetupPassword() {
-  const [username, setUsername] = useState('');
+  const [student_id, setStudentId] = useState('');
   const [code, setCode] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -21,7 +21,7 @@ export default function SetupPassword() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, code, password }),
+        body: JSON.stringify({ student_id, code, password }),
       });
       
       const data = await response.json();
@@ -53,12 +53,12 @@ export default function SetupPassword() {
         )}
 
         <div style={{ marginBottom: '20px', textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '10px', fontWeight: '600', color: '#a1c4fd' }}>Username</label>
+          <label style={{ display: 'block', marginBottom: '10px', fontWeight: '600', color: '#a1c4fd' }}>Student ID</label>
           <input
             type="text"
             required
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={student_id}
+            onChange={(e) => setStudentId(e.target.value)}
             style={{ 
               width: '100%', padding: '15px', borderRadius: '8px', 
               border: '1px solid rgba(255, 255, 255, 0.2)', 
